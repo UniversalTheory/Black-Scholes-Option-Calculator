@@ -36,13 +36,21 @@ def on_calculate():
     except ValueError:
         result_var.set("Please enter valid numbers for all fields.")
         
+def on_clear():
+    stock_price.delete(0, tk.END)
+    strike_price.delete(0, tk.END)
+    time_to_expiry.delete(0, tk.END)
+    risk_free_rate.delete(0, tk.END)
+    volatility.delete(0, tk.END)
+    call_price_var.set("")
+    put_price_var.set("")
 
 
-# Creating main window
+# Create main window
 root = tk.Tk()
 root.title("Option Pricing with Black-Scholes Model")
 
-# Creating input labels and entry widgets
+# Create input labels and entry widgets
 labels = ['Stock Price', 'Strike Price', 'Time to Expiry (in years)', 
           'Risk-Free Rate (in decimal)', 'Volatility (in decimal)']
 
@@ -64,11 +72,16 @@ for i, entry in enumerate(entries):
 calculate_button = ttk.Button(root, text="Calculate", command=on_calculate)
 calculate_button.grid(columnspan=2, row=5, pady=10)
 
+# Clear button
+clear_button = ttk.Button(root, text="Clear", command=on_clear)
+clear_button.grid(columnspan=2, row=8, pady=10)
+
 # Show option prices
 call_price_var = tk.StringVar()
 put_price_var = tk.StringVar()
 ttk.Label(root, textvariable=call_price_var).grid(columnspan=2, row=6, pady=5)
 ttk.Label(root, textvariable=put_price_var).grid(columnspan=2, row=7, pady=5)
+
 
 # Let the games begin...
 root.mainloop()
