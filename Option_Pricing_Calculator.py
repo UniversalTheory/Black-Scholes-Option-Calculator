@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import numpy as np
 from scipy.stats import norm
 
@@ -34,7 +35,8 @@ def on_calculate():
         call_price_var.set(f"Call Option Price: {call_price:.2f}")
         put_price_var.set(f"Put Option Price: {put_price:.2f}")
     except ValueError:
-        result_var.set("Please enter valid numbers for all fields.")
+        messagebox.showerror("Error", "Please enter valid numbers for all fields.")
+        
         
 def on_clear():
     stock_price.delete(0, tk.END)
